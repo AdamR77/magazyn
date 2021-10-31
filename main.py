@@ -1,5 +1,18 @@
+
+from typing import NamedTuple
+from decimal import Decimal
+
+class MyTuple(NamedTuple):
+    count: int
+    name: str
+    unit: str
+    price: Decimal
+    amount: int
+
+
+
 items_list = []
-amount = []
+
 
 #pobieranie danych: name, unit, price, amount
 count = 1
@@ -32,13 +45,13 @@ while True:
         print(f'podaj cenę towaru [{name}]:', end = " ")
         price = input()
         try:
-            float(price)
+            round((Decimal(price)),2)
         except:
             print('cena musi być liczbą >= 0')    
         else:    
-            if float(price) < 0:
+            if Decimal(price) < 0:
                 print('cena nie może być ujemna')
-            if float(price) >= 0:    
+            if Decimal(price) >= 0:    
                 break         
         #print('cena musi być liczbą >= 0')
 
@@ -54,21 +67,25 @@ while True:
             if int(amount) < 0:
                 print('podaj ilość >= 0')
             break
-    price = float(price)
-    amount = int(amount)
-    parameters = (count, name, unit, price, amount) 
+    #price = float(price)
+    #amount = int(amount)
+    parameters = MyTuple(count, name, unit, price, amount) 
     items_list.append(parameters)   
     count += 1
-print(items_list)
-print(' Lp. \t  Towar \t jednostka \t cena \t  ilość ')
-print(' --- \t  ----- \t --------- \t ---- \t  ----- ')
-for items_list in parameters: 
-    count =parameters[0]
-    name = parameters[1]
-    unit = parameters[2]
-    price = parameters[3]
-    price = parameters[4]       
-    print(f'  {count}\t   {name}\t    {unit}\t  {price} \t  {amount}')
+#print(items_list)
+print('Lp.\tTowar\tjednostka\tcena\tilość ')
+print('---\t-----\t---------\t----\t----- ')
+for t in items_list:
+    print(f' {t.count}\t{t.name}\t{t.unit}\t{t.price}\t{t.amount}')
+
+
+
+
+
+    
+    
+
+
 
 
 
